@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priming</title>
+    <style>
+        .Text{
+            font-size: 80px;
+            text-align: center;
+        }
+        .invisible{
+            visibility: hidden;
+        }
+        #question{
+            text-align: center;
+            font-size: 50px;
+        }
+        #Yes{
+            font-size: 20px;
+            padding:10px 32px;
+        }
+        #No{
+            font-size: 20px;
+            padding: 10px 34px;
+        }
+    </style>
+</head>
+<body>
+    <div class="Text">
+        <p id="prime">######</p>
+    </div>
+    
+    <form action="" method="POST">
+        <div id="question" class="invisible">
+            <p>Are the words same?</p>
+            <button formaction="/Yes" id="Yes">Yes</button>
+            &ensp;&ensp;&ensp;&ensp;
+            <button formaction="/No" id="No">No</button>
+        </div>
+    </form>
+
+    <script>
+                document.getElementById('prime').innerHTML = "######"
+                setTimeout(function (){
+                    let element = document.getElementById('prime');
+                    element.innerHTML = '<%-first%>';
+                },800);
+                setTimeout(function (){
+                    let element = document.getElementById('prime');
+                    element.innerHTML = '<%-second%>';
+                },1300);
+                setTimeout(function (){
+                    let element = document.getElementById('question');
+                    element.classList.remove('invisible');
+                },1800);          
+        
+    </script>
+</body>
+</html>
