@@ -6,10 +6,10 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs'); 
 app.use(express.static(__dirname+'/public'));
 
-let qs = [["Horse","House"],["CRA","CAR"],["PLICE","POLICE"],["bikes","BIKES"],["camera","CAMERA"],["pencil","PENCIL"],["sound","SOUND"]];
+let qs = [["winter","BLANKET"],["food","RESTAURANT"],["bike","ROAD"],["door","HOUSE"],["chair","TABLE"],["Jungle","LION"],["Needle","THREAD"],["Branf","BRANT"],["Pipsi","PIPSO"],["Borel","BORET"],["বাগান","কমল"],["কাহিনি","কাব্য"],["ছাতা","বর্ষা"],["আহরণ","গল্প"],["ধ্বনি","শব্দ"],["প্রিয়জন","আত্মীয়"],["শয্যা","বালিস"],["সজেম","সজেত"],["তমাস","তমাক"],["কাতান","কাতাম"]];
 let counter = 0;
 let answers = [];
-let keys = [0,0,0,1,1,1,1];
+let keys = [1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,0];
 let response = 0;
 let start = 0;
 let end = 0;
@@ -24,9 +24,9 @@ app.post('/Yes',(req,res)=>{
     counter++;
     if(counter==qs.length){
         end = time();
-        console.log("end: "+end);
+        // console.log("end: "+end);
         response+=(end-start-1800);
-        console.log("response: "+response);
+        // console.log("response: "+response);
         let correct = 0;
         for(let j=0;j<qs.length;j++){
             if(answers[j]==keys[j]){
@@ -39,11 +39,11 @@ app.post('/Yes',(req,res)=>{
     }
     else{
         end = time();
-        console.log("end: "+end);
+        // console.log("end: "+end);
         response+=(end-start-1800);
-        console.log("response: "+response);
+        // console.log("response: "+response);
         start = time();
-        console.log("start: "+start);
+        // console.log("start: "+start);
         return res.render('frontend',{first:qs[counter][0],second:qs[counter][1]});
     }
 })
@@ -52,7 +52,7 @@ app.get('/',(req,res)=>{
     counter = 0;
     answers=[];
     start = time();
-    console.log("start: "+start);
+    // console.log("start: "+start);
     return res.render('frontend',{first:qs[counter][0],second:qs[counter][1]});
 })
 
@@ -61,9 +61,9 @@ app.post('/No',(req,res)=>{
     counter++;
     if(counter==qs.length){
         end = time();
-        console.log("end: "+end);
+        // console.log("end: "+end);
         response+=(end-start-1800);
-        console.log("response: "+response);
+        // console.log("response: "+response);
         let correct = 0;
         for(let j=0;j<qs.length;j++){
             if(answers[j]==keys[j]){
@@ -76,11 +76,11 @@ app.post('/No',(req,res)=>{
     }
     else{
         end = time();
-        console.log("end: "+end);
+        // console.log("end: "+end);
         response+=(end-start-1800);
-        console.log("response: "+response);
+        // console.log("response: "+response);
         start = time();
-        console.log("start: "+start);
+        // console.log("start: "+start);
         return res.render('frontend',{first:qs[counter][0],second:qs[counter][1]});
     }
 })
@@ -88,3 +88,4 @@ app.post('/No',(req,res)=>{
 app.listen(PORT,()=>{
     console.log("Server started");
 })
+
