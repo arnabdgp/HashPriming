@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priming</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .Text{
+            font-size: 80px;
+            text-align: center;
+        }
+        #Prime{
+            font-size: 20px;
+            padding:10px 32px;
+        }
+        #NoPrime{
+            font-size: 20px;
+            padding: 10px 34px;
+        }
+        .buttons{
+            /* align-items: center; */
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="Text">
+        <p id="prime">Choose:</p>
+    </div>
+    
+    <div class="buttons" style="align-items: center;">
+    <form action="" method="get">
+            <button formaction="/withPrime" id="Prime">With Priming</button>
+            &ensp;&ensp;&ensp;&ensp;
+            <button formaction="/withoutPrime" id="NoPrime">Without Priming</button>
+        </div>
+    </form>
+</body>
+</html>

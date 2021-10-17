@@ -7,6 +7,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname+'/public'));
 
 let qs = [["winter","BLANKET"],["food","RESTAURANT"],["bike","ROAD"],["door","HOUSE"],["chair","TABLE"],["Jungle","LION"],["Needle","THREAD"],["Branf","BRANT"],["Pipsi","PIPSO"],["Borel","BORET"],["বাগান","কমল"],["কাহিনি","কাব্য"],["ছাতা","বর্ষা"],["আহরণ","গল্প"],["ধ্বনি","শব্দ"],["প্রিয়জন","আত্মীয়"],["শয্যা","বালিস"],["সজেম","সজেত"],["তমাস","তমাক"],["কাতান","কাতাম"]];
+let nqs = ["BLANKET","RESTAURANT","ROAD","HOUSE","TABLE","LION","THREAD","BRANT","PIPSO","BORET","কমল","কাব্য","বর্ষা","গল্প","শব্দ","আত্মীয়","বালিস","সজেত","তমাক","কাতাম"];
+
 let eng_question = "Is this a real word or not?";
 let beng_question = "এটি কি একটি অর্থপূর্ণ শব্দ? হ্যাঁ বা না";
 let counter = 0;
@@ -28,14 +30,12 @@ let time = function(){
     return d.getTime();
 }
 
-app.post('/Yes',(req,res)=>{
+app.post('/PrimeYes',(req,res)=>{
     answers.push(1);
     counter++;
     if(counter==qs.length){
         end = time();
-        // console.log("end: "+end);
-        beng_response+=(end-start-1067);
-        // console.log("response: "+beng_response);
+        beng_response+=(end-start-1350);
         let correct = 0;
         for(let j=0;j<qs.length;j++){
             if(j>=0&&j<=9 && answers[j]==keys[j]){
@@ -50,15 +50,11 @@ app.post('/Yes',(req,res)=>{
     }
     else{
         end = time();
-        // console.log("end: "+end);
         if(counter>=0 && counter<=9)
-            eng_response+=(end-start-1067);
+            eng_response+=(end-start-1350);
         else
-            beng_response+=(end-start-1067);
-        // response+=(end-start-1800);
-        // console.log("response: "+response);
+            beng_response+=(end-start-1350);
         start = time();
-        // console.log("start: "+start);
         if(counter>=0 && counter<=9)
             return res.render('frontend',{first:qs[counter][0],second:qs[counter][1],question:eng_question,pos:eng_yes, neg:eng_no});
         else
@@ -66,22 +62,62 @@ app.post('/Yes',(req,res)=>{
     }
 })
 
+app.post('/NoPrimeYes',(req,res)=>{
+    answers.push(1);
+    counter++;
+    if(counter==qs.length){
+        end = time();
+        beng_response+=(end-start-1000);
+        let correct = 0;
+        for(let j=0;j<qs.length;j++){
+            if(j>=0&&j<=9 && answers[j]==keys[j]){
+                correct_eng++;
+            }
+            else if(answers[j]==keys[j])
+                correct_beng++;
+        }
+        counter = 0;
+        answers=[];
+        return res.render('result',{correct_eng: correct_eng,correct_beng:correct_beng,correct: correct,len: 10,eng_response:(eng_response/10).toFixed(2),beng_response:(beng_response/10).toFixed(2)});
+    }
+    else{
+        end = time();
+        if(counter>=0 && counter<=9)
+            eng_response+=(end-start-1000);
+        else
+            beng_response+=(end-start-1000);
+        start = time();
+        if(counter>=0 && counter<=9)
+            return res.render('frontend_noprime',{first:nqs[counter],question:eng_question,pos:eng_yes, neg:eng_no});
+        else
+            return res.render('frontend_noprime',{first:nqs[counter],question:beng_question,pos:beng_yes, neg:beng_no});
+    }
+})
+
 app.get('/',(req,res)=>{
+    return res.render('index');
+})
+
+app.get('/withPrime',(req,res)=>{
     counter = 0;
     answers=[];
     start = time();
-    // console.log("start: "+start);
     return res.render('frontend',{first:qs[counter][0],second:qs[counter][1],question:eng_question,pos:eng_yes, neg:eng_no});
 })
 
-app.post('/No',(req,res)=>{
+app.get('/withoutPrime',(req,res)=>{
+    counter = 0;
+    answers=[];
+    start = time();
+    return res.render('frontend_noprime',{first:nqs[counter],question:eng_question,pos:eng_yes, neg:eng_no});
+})
+
+app.post('/PrimeNo',(req,res)=>{
     answers.push(0);
     counter++;
     if(counter==qs.length){
         end = time();
-        // console.log("end: "+end);
-        beng_response+=(end-start-1067);
-        // console.log("response: "+response);
+        beng_response+=(end-start-1350);
         let correct = 0;
         for(let j=0;j<qs.length;j++){
             if(j>=0&&j<=9 && answers[j]==keys[j]){
@@ -96,18 +132,47 @@ app.post('/No',(req,res)=>{
     }
     else{
         end = time();
-        // console.log("end: "+end);
         if(counter>=0 && counter<=9)
-            eng_response+=(end-start-1067);
+            eng_response+=(end-start-1350);
         else
-            beng_response+=(end-start-1067);
-        // console.log("response: "+response);
+            beng_response+=(end-start-1350);
         start = time();
-        // console.log("start: "+start);
         if(counter>=0 && counter<=9)
             return res.render('frontend',{first:qs[counter][0],second:qs[counter][1],question:eng_question,pos:eng_yes, neg:eng_no});
         else
             return res.render('frontend',{first:qs[counter][0],second:qs[counter][1],question:beng_question,pos:beng_yes, neg:beng_no});
+    }
+})
+
+app.post('/NoPrimeNo',(req,res)=>{
+    answers.push(0);
+    counter++;
+    if(counter==qs.length){
+        end = time();
+        beng_response+=(end-start-1000);
+        let correct = 0;
+        for(let j=0;j<qs.length;j++){
+            if(j>=0&&j<=9 && answers[j]==keys[j]){
+                correct_eng++;
+            }
+            else if(answers[j]==keys[j])
+                correct_beng++;
+        }
+        counter = 0;
+        answers=[];
+        return res.render('result',{correct_eng: correct_eng,correct_beng:correct_beng,len: 10,eng_response:(eng_response/10).toFixed(2),beng_response:(beng_response/10).toFixed(2)});
+    }
+    else{
+        end = time();
+        if(counter>=0 && counter<=9)
+            eng_response+=(end-start-1000);
+        else
+            beng_response+=(end-start-1000);
+        start = time();
+        if(counter>=0 && counter<=9)
+            return res.render('frontend_noprime',{first:nqs[counter],question:eng_question,pos:eng_yes, neg:eng_no});
+        else
+            return res.render('frontend_noprime',{first:nqs[counter],question:beng_question,pos:beng_yes, neg:beng_no});
     }
 })
 

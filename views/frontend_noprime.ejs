@@ -35,9 +35,9 @@
     <form action="" method="POST">
         <div id="question" class="invisible">
             <p><%= question %></p>
-            <button formaction="/PrimeYes" id="Yes"><%= pos %></button>
+            <button formaction="/NoPrimeYes" id="Yes"><%= pos %></button>
             &ensp;&ensp;&ensp;&ensp;
-            <button formaction="/PrimeNo" id="No"><%= neg %></button>
+            <button formaction="/NoPrimeNo" id="No"><%= neg %></button>
         </div>
     </form>
 
@@ -48,13 +48,9 @@
                     element.innerHTML = '<%-first%>';
                 },500);
                 setTimeout(function (){
-                    let element = document.getElementById('prime');
-                    element.innerHTML = '<%-second%>';
-                },850);
-                setTimeout(function (){
                     let element = document.getElementById('question');
                     element.classList.remove('invisible');
-                },1350);          
+                },1000);          
         
     </script>
 </body>
