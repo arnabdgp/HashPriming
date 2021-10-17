@@ -29,15 +29,15 @@
 </head>
 <body>
     <div class="Text">
-        <p id="prime">######</p>
+        <p id="prime">#######</p>
     </div>
     
     <form action="" method="POST">
         <div id="question" class="invisible">
-            <p>Is this a real word or not?</p>
-            <button formaction="/Yes" id="Yes">Yes</button>
+            <p><%= question %></p>
+            <button formaction="/Yes" id="Yes"><%= pos %></button>
             &ensp;&ensp;&ensp;&ensp;
-            <button formaction="/No" id="No">No</button>
+            <button formaction="/No" id="No"><%= neg %></button>
         </div>
     </form>
 
